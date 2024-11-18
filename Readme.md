@@ -60,3 +60,8 @@ Las contribuciones son bienvenidas. Si deseas contribuir, por favor sigue estos 
 
 
 Siente libre de personalizar cualquier sección según las necesidades específicas de tu aplicación.
+
+### Notas importantes
+
+* [Ip swagger](http://localhost:9988/swagger-ui/index.html#/)
+* [Ip front](https://localhost:3000)
