@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador para manejar las operaciones relacionadas con los mensajes.
+ * Proporciona endpoints para enviar mensajes, obtener mensajes entre usuarios
+ * y recuperar chats de usuario.
+ */
 @RestController
 @RequestMapping("/api/messages")
 @RequiredArgsConstructor

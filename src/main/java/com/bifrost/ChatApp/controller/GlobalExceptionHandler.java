@@ -10,6 +10,29 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
+/**
+ * GlobalExceptionHandler se encarga de manejar excepciones globalmente
+ * en una aplicación Spring Boot. Proporciona un controlador centralizado
+ * para excepciones lanzadas dentro de la aplicación.
+ *
+ * Este controlador define métodos para manejar distintas excepciones específicas
+ * que heredan de RuntimeException, así como una excepción genérica para errores
+ * inesperados. Cada método está anotado con @ExceptionHandler para especificar
+ * la excepción que maneja y usa @ResponseStatus para devolver el código HTTP apropiado.
+ *
+ * Excepciones manejadas:
+ *
+ * - AccesoDenegadoException: Retorna un estado HTTP 403 FORBIDDEN.
+ * - CredencialesInvalidasException: Retorna un estado HTTP 401 UNAUTHORIZED.
+ * - OperacionNoPermitidaException: Retorna un estado HTTP 403 FORBIDDEN.
+ * - UsuarioInactivoException: Retorna un estado HTTP 403 FORBIDDEN.
+ * - UsuarioNoEncontradoException: Retorna un estado HTTP 404 NOT FOUND.
+ * - UsuarioYaExisteException: Retorna un estado HTTP 409 CONFLICT.
+ * - EmailYaExisteException: Retorna un estado HTTP 409 CONFLICT.
+ * - Exception: Para cualquier otra excepción no prevista, se registra el
+ *   error y se retorna un estado HTTP 500 INTERNAL SERVER ERROR con un
+ *   mensaje de error genérico.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

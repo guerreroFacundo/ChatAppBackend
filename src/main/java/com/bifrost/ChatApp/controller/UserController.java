@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controlador que maneja las operaciones relacionadas con los usuarios, como el registro y la autenticación.
+ */
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin
