@@ -14,6 +14,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * MessageService es una clase de servicio que maneja las operaciones
+ * relacionadas con el envío y recepción de mensajes en la aplicación de chat.
+ * Se encarga de interactuar con el MessageRepository y el UserService
+ * para realizar las funciones necesarias para gestionar los mensajes.
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor

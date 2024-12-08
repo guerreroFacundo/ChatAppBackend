@@ -9,22 +9,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
+/**
+ * Configuración de seguridad para la aplicación.
+ * Esta clase se encarga de definir las configuraciones necesarias para el
+ * manejo de la seguridad en la aplicación, como la autorización de
+ * peticiones y la codificación de contraseñas.
+ *
+ * La clase utiliza anotaciones de Spring Security para establecer las
+ * configuraciones mediante la definición de beans que serán gestionados
+ * por el contenedor de Spring.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests((authz) -> authz
-//                        .requestMatchers("/api/users/register").permitAll() // Permite acceso anónimo
-//                        .anyRequest().authenticated()
-//                )
-//                .csrf(AbstractHttpConfigurer::disable) // Desactiva CSRF en versiones 6.1 y posteriores
-//        // Otros ajustes de seguridad
-//        ;
-//        return http.build();
-//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

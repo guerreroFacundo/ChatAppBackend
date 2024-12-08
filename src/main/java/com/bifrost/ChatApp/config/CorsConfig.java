@@ -8,6 +8,19 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
+/**
+ * Configuración de CORS (Cross-Origin Resource Sharing) para la aplicación.
+ * Esta clase define las reglas de CORS que permiten a los navegadores web
+ * realizar solicitudes de recursos a un dominio diferente al de la página
+ * original.
+ *
+ * La configuración especificada permite orígenes específicos, métodos
+ * HTTP, y encabezados requeridos para la interacción entre el servidor y
+ * el cliente. Además, permite el envío de cookies si es necesario.
+ *
+ * Uso de {@link CorsConfigurationSource} para definir las reglas CORS y
+ * {@link UrlBasedCorsConfigurationSource} para aplicarlas a todas las rutas.
+ */
 @Configuration
 public class CorsConfig {
 

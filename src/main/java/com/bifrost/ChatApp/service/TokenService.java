@@ -9,6 +9,9 @@ import javax.crypto.SecretKey;
 import java.security.SecureRandom;
 import java.util.Date;
 
+/**
+ * Clase TokenService que proporciona servicios para generar y validar tokens JWT.
+ */
 @Service
 public class TokenService {
 
