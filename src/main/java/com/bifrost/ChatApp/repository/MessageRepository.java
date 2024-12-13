@@ -20,7 +20,11 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     @Query("SELECT DISTINCT m.senderId FROM Message m WHERE m.receiverId = :userId")
     List<Long> findDistinctSenderIdsByReceiverId(@Param("userId") Long userId);
 
-    List<Message> findBySenderIdAndReceiverIdOrReceiverIdAndSenderIdOrderByTimestampAsc(Long senderId, Long receiverId, Long receiverId2, Long senderId2);
-
+    @Query("SELECT m FROM Message m " +
+            "WHERE (m.senderId = :senderId AND m.receiverId = :receiverId) " +
+            "   OR (m.senderId = :receiverId AND m.receiverId = :senderId) " +
+            "ORDER BY m.timestamp ASC")
+    List<Message> findByUsers(@Param("senderId") Long senderId,
+                              @Param("receiverId") Long receiverId);
 }
 

@@ -85,4 +85,10 @@ public class GlobalExceptionHandler {
         log.error(ex.getMessage());
         return new ResponseEntity<>("Ocurrió un error inesperado", HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(MensajeNoEncontradoException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleMensajeNoEncontradoException(MensajeNoEncontradoException ex) {
+        return ex.getMessage(); // Devuelve el mensaje de error al cliente
+    }
 }

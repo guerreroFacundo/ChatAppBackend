@@ -2,6 +2,7 @@ package com.bifrost.ChatApp.service;
 
 import com.bifrost.ChatApp.dto.UserDTO;
 import com.bifrost.ChatApp.entitie.Message;
+import com.bifrost.ChatApp.exception.MensajeNoEncontradoException;
 import com.bifrost.ChatApp.repository.MessageRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -55,8 +56,12 @@ public class MessageService {
     // Recuperar mensajes entre dos usuarios
     public List<Message> getMessagesBetween(Long userId, Long contactId) {
         log.info("INICIO---->getMessagesBetween :userId = {}, contactId = {}", userId, contactId);
-        // Obtiene todos los mensajes entre los dos usuarios, ordenados por timestamp
-        return messageRepository.findBySenderIdAndReceiverIdOrReceiverIdAndSenderIdOrderByTimestampAsc(userId, contactId, userId, contactId);
+
+        // Recupera todos los mensajes que no han sido marcados como "borrados" para el usuario
+        return messageRepository.findByUsers(userId, contactId)
+                .stream()
+                .filter(message -> !message.getDeletedFor().contains(userId)) // Filtra los mensajes borrados para el usuario
+                .toList();
     }
 
     // Recuperar todos los mensajes de un usuario (como histórico)
@@ -78,6 +83,20 @@ public class MessageService {
         List<UserDTO> dtoUserList = userService.findUsersDTOsByIds(new ArrayList<>(contactIds));
         log.info(dtoUserList.toString());
         return dtoUserList;
+    }
+
+    public void deleteMessageForUser(Long messageId, Long userId) {
+        log.info("INICIO---->deleteMessageForUser :messageId = {}, userId = {}", messageId, userId);
+
+        // Recuperar el mensaje por su ID
+        Message message = messageRepository.findById(messageId)
+                .orElseThrow(() ->  new MensajeNoEncontradoException("El mensaje con ID " + messageId + " no fue encontrado."));
+
+        // Marcar el mensaje como eliminado si aún no está en la lista
+        if (!message.getDeletedFor().contains(userId)) {
+            message.getDeletedFor().add(userId);
+            messageRepository.save(message);
+        }
     }
 
 

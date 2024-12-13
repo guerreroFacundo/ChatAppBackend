@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,6 +27,8 @@ public class Message {
     private String content;
     private LocalDateTime timestamp;
     private Long replyTo;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Long> deletedFor = new ArrayList<>();
 
 
 }

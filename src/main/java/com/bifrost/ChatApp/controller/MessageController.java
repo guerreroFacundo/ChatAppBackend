@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Controlador para manejar las operaciones relacionadas con los mensajes.
- * Proporciona endpoints para enviar mensajes, obtener mensajes entre usuarios
- * y recuperar chats de usuario.
+ * Controlador REST para gestionar mensajes. Este controlador proporciona endpoints
+ * para enviar, obtener y eliminar mensajes, además de consultar los chats de un usuario.
  */
 @RestController
 @RequestMapping("/api/messages")
@@ -73,6 +72,22 @@ public class MessageController {
         // Obtener los IDs de usuarios con los que se ha intercambiado mensajes
         List<UserDTO> dtoUserList = messageService.getUserChatContacts(userId);
         return dtoUserList;
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteMessageForUser(
+            @RequestParam Long messageId,
+            @RequestParam Long userId
+    ) {
+        log.info("INICIO---->deleteMessageForUser :messageId = {}, userId = {}", messageId, userId);
+        try {
+            // Lógica para borrar el mensaje para ese usuario
+            messageService.deleteMessageForUser(messageId, userId);
+            return ResponseEntity.ok("El mensaje ha sido eliminado para el usuario.");
+        } catch (Exception e) {
+            log.error("Error al eliminar el mensaje: {}", e.getMessage());
+            return ResponseEntity.badRequest().body("No se pudo eliminar el mensaje.");
+        }
     }
 
 
